@@ -34,12 +34,23 @@ static std::vector<char> read_file(const std::string& path) {
 }
 
 static hsa_agent_t g_gpu_agent{};
+static hsa_agent_t g_cpu_agent{};
 
 static hsa_status_t find_gpu(hsa_agent_t agent, void*) {
     hsa_device_type_t type;
     hsa_agent_get_info(agent, HSA_AGENT_INFO_DEVICE, &type);
     if (type == HSA_DEVICE_TYPE_GPU) {
         g_gpu_agent = agent;
+        return HSA_STATUS_INFO_BREAK;
+    }
+    return HSA_STATUS_SUCCESS;
+}
+
+static hsa_status_t find_cpu(hsa_agent_t agent, void*) {
+    hsa_device_type_t type;
+    hsa_agent_get_info(agent, HSA_AGENT_INFO_DEVICE, &type);
+    if (type == HSA_DEVICE_TYPE_CPU) {
+        g_cpu_agent = agent;
         return HSA_STATUS_INFO_BREAK;
     }
     return HSA_STATUS_SUCCESS;
@@ -297,6 +308,7 @@ int main(int argc, char** argv) {
     }
 
     hsa_iterate_agents(find_gpu, nullptr);
+    hsa_iterate_agents(find_cpu, nullptr);
 
     std::cerr << "Stage 1: GPU agent found\n";
     std::cerr.flush();
@@ -391,10 +403,12 @@ int main(int argc, char** argv) {
             return 1;
         }
 
-        hsa_amd_memory_access_desc_t access{};
-        access.agent_handle = g_gpu_agent;
-        access.permissions = HSA_ACCESS_PERMISSION_RW;
-        hsa_amd_vmem_set_access(reserved, r.aligned_size, &access, 1);
+        hsa_amd_memory_access_desc_t access[2]{};
+        access[0].agent_handle = g_gpu_agent;
+        access[0].permissions = HSA_ACCESS_PERMISSION_RW;
+        access[1].agent_handle = g_cpu_agent;
+        access[1].permissions = HSA_ACCESS_PERMISSION_RW;
+        hsa_amd_vmem_set_access(reserved, r.aligned_size, access, 2);
 
         std::stringstream fname;
         fname << capture_dir << "/memory/region_"
@@ -610,7 +624,12 @@ int main(int argc, char** argv) {
         for (auto& rr : runtime_regions) {
             void* dst = static_cast<void*>(
                 static_cast<uint8_t*>(rr.reserved) + rr.offset);
-            hsa_memory_copy(dst, rr.blob.data(), rr.size);
+            hsa_status_t cst = hsa_memory_copy(dst, rr.blob.data(), rr.size);
+            if (cst != HSA_STATUS_SUCCESS) {
+                std::cerr << "hsa_memory_copy failed for region 0x"
+                          << std::hex << rr.original_base << std::dec
+                          << " (status=" << cst << ")\n";
+            }
         }
     };
 
