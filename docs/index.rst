@@ -17,8 +17,8 @@ hosted in the `AMDResearch/intellikit <https://github.com/AMDResearch/intellikit
 
       * :doc:`Set up MCP <how-to/mcp-setup>`
       * :doc:`Set up skills <how-to/skills-setup>`
-      * :doc:`Profile a GPU application <getting-started/quickstart>`
-      * :doc:`Profile, optimize, and validate a kernel <how-to/workflow>`
+      * :doc:`Profile an application <getting-started/quickstart>`
+      * :doc:`Use IntelliKit end to end <how-to/workflow>`
 
    .. grid-item-card:: Reference
 

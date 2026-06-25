@@ -19,9 +19,9 @@ subtrees:
   - file: how-to/skills-setup
     title: Set up skills
   - file: getting-started/quickstart
-    title: Profile a GPU application
+    title: Profile an application
   - file: how-to/workflow
-    title: Profile, optimize, and validate a kernel
+    title: Use IntelliKit end to end
 
 - caption: Reference
   entries:
