@@ -4,6 +4,8 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+version_number = "0.1.0"
+
 html_theme = "rocm_docs_theme"
 html_theme_options = {
     "flavor": "generic",
@@ -19,8 +21,6 @@ html_theme_options = {
     },
     "link_main_doc": False,
 }
-
-version_number = "0.1.0"
 
 # for PDF output on Read the Docs
 project = "IntelliKit"
