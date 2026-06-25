@@ -31,7 +31,7 @@ hosted in the `AMDResearch/intellikit <https://github.com/AMDResearch/intellikit
       * :doc:`uProf MCP <tools/uprof-mcp>`
 
 To contribute to the documentation, see the
-:doc:`Contributing <about/contributing>` page.
+:doc:`Contributing <contributing>` page.
 
 Magpie is released under the MIT license. For details, see the `IntelliKit GitHub repository <https://github.com/AMDResearch/intellikit/blob/main/LICENSE>`_.
 
