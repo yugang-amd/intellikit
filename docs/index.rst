@@ -33,6 +33,5 @@ hosted in the `AMDResearch/intellikit <https://github.com/AMDResearch/intellikit
 To contribute to the documentation, see the
 :doc:`Contributing <contributing>` page.
 
-IntelliKit is released under the MIT license. For details, see the
-:doc:`License <license>` page.
+Magpie is released under the MIT license. For details, see the `IntelliKit GitHub repository <https://github.com/AMDResearch/intellikit/blob/main/LICENSE>`_.
 
