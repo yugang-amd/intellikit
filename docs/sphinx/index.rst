@@ -1,0 +1,76 @@
+IntelliKit
+==========
+
+Agent-first tooling for AMD hardware.
+
+What's in the box
+-----------------
+
+IntelliKit is a set of Python tools for AMD-focused performance and validation. Most of the stack targets GPUs through ROCm, turning hardware counters, traces, and dispatch data into clear APIs you can use from Python. ``uprof_mcp`` adds AMD uProf for host-side CPU hotspot analysis. For LLM-style workflows you also get MCP servers and agent skills — installable ``SKILL.md`` playbooks for Cursor, Claude, Codex, and GitHub Copilot.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 15 70
+
+   * - Tool
+     - Role
+     - Description
+   * - **Kerncap**
+     - Isolate
+     - Capture kernel dispatches, build standalone reproducers for HIP and Triton
+   * - **Metrix**
+     - Profile
+     - Human-readable metrics from hardware counters: bandwidth, cache, compute
+   * - **Linex**
+     - Profile
+     - Source-line timing and stall analysis — map GPU performance to your code
+   * - **Nexus**
+     - Inspect
+     - Intercept HSA packets to see what ran on the GPU: assembly and HIP source
+   * - **Accordo**
+     - Validate
+     - Prove an optimized kernel still matches a reference implementation
+   * - **ROCm MCP**
+     - MCP
+     - HIP compiler, HIP docs, and rocminfo servers for LLM agents
+   * - **uProf MCP**
+     - CPU
+     - MCP bridge to AMD uProf for host-side CPU hotspot analysis
+
+Install
+-------
+
+.. code-block:: bash
+
+   # Install all tools
+   curl -sSL https://raw.githubusercontent.com/AMDResearch/intellikit/main/install/tools/install.sh | bash
+
+   # Install agent skills (Cursor, Claude, Codex, GitHub Copilot)
+   curl -sSL https://raw.githubusercontent.com/AMDResearch/intellikit/main/install/skills/install.sh | bash
+
+The workflow
+------------
+
+**Isolate** a kernel with Kerncap, **profile** it with Metrix and Linex, **inspect** execution with Nexus, wire agents via **MCP servers** and **skills**, add **uProf** for host-side analysis, then lock in correctness with **Accordo**.
+
+.. code-block:: python
+
+   from metrix import Metrix
+   from nexus import Nexus
+   from accordo import Accordo
+
+   # 1) Profile — human-readable GPU metrics
+   profiler = Metrix()
+   baseline = profiler.profile("./app", metrics=["memory.hbm_bandwidth_utilization"])
+
+   # 2) Inspect — see what ran on the GPU
+   trace = Nexus().run(["./app"])
+   for kernel in trace:
+       print(kernel.name, len(kernel.assembly), "instructions")
+
+   # 3) Validate — check correctness after optimization
+   validator = Accordo(binary="./app", kernel_name="my_kernel")
+   ref = validator.capture_snapshot(binary="./app_ref")
+   opt = validator.capture_snapshot(binary="./app_opt")
+   result = validator.compare_snapshots(ref, opt, tolerance=1e-6)
+   print(f"{'PASS' if result.is_valid else 'FAIL'}")
