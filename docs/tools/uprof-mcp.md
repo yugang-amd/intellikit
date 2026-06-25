@@ -9,6 +9,12 @@ A Model Context Protocol (MCP) server for profiling x86 CPU applications using A
 - Generate detailed profiling reports
 - Support for custom executable arguments
 
+## Requirements
+
+- Python >= 3.10
+- AMD uProf installed
+- x86 CPU architecture
+
 ## Installation
 
 ```bash
@@ -84,12 +90,6 @@ profiler = UProfProfiler(logger=None)
   - `executable` (str | Path) — path to executable
   - `executable_args` (list[str] | None) — arguments for the executable
   - Returns `UProfProfilerResult` with `report_path` attribute
-
-## Requirements
-
-- Python >= 3.10
-- AMD uProf installed
-- x86 CPU architecture
 
 ## Development
 

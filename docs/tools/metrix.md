@@ -12,6 +12,12 @@ Clean, human-readable metrics for AMD GPUs. No more cryptic hardware counters.
 - **Kernel filtering**: efficient regex filtering at rocprofv3 level
 - **Multiple output formats**: text, JSON, CSV
 
+## Requirements
+
+- Python 3.9+
+- ROCm 6.x with rocprofv3
+- pandas >= 1.5.0
+
 ## Installation
 
 ```bash
@@ -133,9 +139,3 @@ metrix info <metric|profile> <name>
 ```
 
 GPU architecture is auto-detected using `rocminfo`.
-
-## Requirements
-
-- Python 3.9+
-- ROCm 6.x with rocprofv3
-- pandas >= 1.5.0

@@ -1,4 +1,4 @@
-# Quick Start
+# Profile a GPU Application with Metrix
 
 This walkthrough profiles a GPU application with Metrix to get human-readable performance metrics.
 

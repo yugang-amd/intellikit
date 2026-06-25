@@ -2,6 +2,11 @@
 
 Map GPU performance metrics to your source code lines.
 
+## Requirements
+
+- Python >= 3.8
+- ROCm 7.0+ with `rocprofv3`
+
 ## Installation
 
 ```bash
@@ -115,7 +120,3 @@ for line in profiler.source_lines[:1]:
         print(f"{inst.isa}: {inst.latency_cycles} cycles")
 ```
 
-## Requirements
-
-- Python >= 3.8
-- ROCm 7.0+ with `rocprofv3`

@@ -9,6 +9,12 @@ Accordo automatically validates GPU kernel correctness by capturing and comparin
 - **Configurable tolerance**: Set precision requirements for floating-point comparisons (`atol`, `rtol`, `equal_nan`)
 - **Performance tracking**: Measure and compare execution times
 
+## Requirements
+
+- Python >= 3.8
+- ROCm toolchain
+- KernelDB (automatically installed)
+
 ## Installation
 
 Accordo compiles C++ code (via KernelDB) during installation. You need `cmake`, `libdwarf-dev`, and `libzstd-dev` first:
@@ -122,8 +128,3 @@ accordo validate \
 **Methods:**
 - `summary()` -> `str` — human-readable validation summary
 
-## Requirements
-
-- Python >= 3.8
-- ROCm toolchain
-- KernelDB (automatically installed)

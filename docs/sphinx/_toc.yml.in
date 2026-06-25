@@ -3,17 +3,27 @@ defaults:
 root: index
 subtrees:
 
+- entries:
+  - file: what-is-intellikit
+    title: What is IntelliKit?
+
 - caption: Install
   entries:
   - file: getting-started/installation
     title: Install IntelliKit
 
-- caption: Quick Start
+- caption: How to
   entries:
+  - file: how-to/mcp-setup
+    title: Set up MCP
+  - file: how-to/skills-setup
+    title: Set up skills
   - file: getting-started/quickstart
-    title: Quick Start
+    title: Profile a GPU application
+  - file: how-to/workflow
+    title: Profile, optimize, and validate a kernel
 
-- caption: Tools
+- caption: Reference
   entries:
   - file: tools/kerncap
     title: Kerncap
@@ -30,18 +40,9 @@ subtrees:
   - file: tools/uprof-mcp
     title: uProf MCP
 
-- caption: How to
-  entries:
-  - file: how-to/mcp-setup
-    title: Set up MCP
-  - file: how-to/skills-setup
-    title: Set up skills
-  - file: how-to/workflow
-    title: Run IntelliKit end-to-end
-
 - caption: About
   entries:
   - file: contributing
     title: Contributing
-  - file: license
-    title: License
+  - file: License
+    title: license
