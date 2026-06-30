@@ -1,15 +1,17 @@
 # Contributing
 
-We welcome issues and pull requests on [GitHub](https://github.com/AMDResearch/IntelliKit).
+To report issues and submit pull requests, visit the [GitHub repository](https://github.com/AMDResearch/IntelliKit).
 
 ## Getting started
+
+To clone the repository and navigate into the directory:
 
 ```bash
 git clone https://github.com/AMDResearch/intellikit.git
 cd intellikit
 ```
 
-Each tool is an independent Python package. Install the ones you want to work on in editable mode:
+Each tool within IntelliKit is an independent Python package. You can install the packages you want to work on in editable mode:
 
 ```bash
 pip install -e ./metrix
@@ -18,7 +20,7 @@ pip install -e ./kerncap[dev]
 # ...any subset
 ```
 
-There is no metapackage at the monorepo root — install each package individually.
+There is no metapackage at the root level of the repository. You must install each package individually.
 
 ## Running tests
 
@@ -52,8 +54,10 @@ intellikit/
 
 ## Bugs and ideas
 
-- **Issues**: [github.com/AMDResearch/intellikit/issues](https://github.com/AMDResearch/intellikit/issues)
+Report issues or share your suggestions on [github.com/AMDResearch/intellikit/issues](https://github.com/AMDResearch/intellikit/issues).
 
 ## License
 
-[MIT](https://github.com/AMDResearch/intellikit/blob/main/LICENSE) — Copyright 2025-2026 Advanced Micro Devices, Inc.
+This project is licensed under the [MIT License](https://github.com/AMDResearch/intellikit/blob/main/LICENSE).
+
+Copyright 2025-2026 Advanced Micro Devices, Inc.

@@ -94,11 +94,11 @@ accordo validate \
 ### `Accordo(binary, kernel_name, **options)`
 
 **Parameters:**
-- `binary` (str | list) — binary path to extract kernel signature from
-- `kernel_name` (str) — name of the kernel to validate
-- `kernel_args` (list[tuple] | None) — manual kernel args as `[(name, type), ...]`. Auto-extracted if None.
+- `binary` (str | list): binary path to extract the kernel signature from
+- `kernel_name` (str): name of the kernel to validate
+- `kernel_args` (list[tuple] | None): manual kernel arguments such as `[(name, type), ...]`. Auto-extracted if set to `None`.
 - `working_directory` (str) — working directory (default: `"."`)
-- `force_rebuild` (bool) — force rebuild even if library exists (default: `False`)
+- `force_rebuild` (bool) — force rebuild even if the library exists (default: `False`)
 - `parallel_jobs` (int) — number of parallel build jobs (default: `16`)
 - `log_level` (str) — logging level (default: `"WARNING"`)
 
@@ -123,8 +123,8 @@ accordo validate \
 | `is_valid` | `bool` | Whether validation passed |
 | `num_arrays_validated` | `int` | Total arrays checked |
 | `num_mismatches` | `int` | Failed comparisons |
-| `mismatches` | `list[ArrayMismatch]` | Detailed mismatch info |
+| `mismatches` | `list[ArrayMismatch]` | Detailed mismatch information |
 
 **Methods:**
-- `summary()` -> `str` — human-readable validation summary
+- `summary()` -> `str`: human-readable validation summary
 
