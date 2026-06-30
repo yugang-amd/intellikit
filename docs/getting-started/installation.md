@@ -74,7 +74,7 @@ The tools installation script provides flexible options to customize the process
 - **Install subset only**: `--tools metrix,linex,nexus`
 - **Custom** `pip`: `--pip-cmd pip3.12` or `--pip-cmd "python3.12 -m pip"`
 - **Branch/tag**: `--ref my-branch`
-- **Custom Git repo**: `--repo-url https://github.com/you/fork.git`
+- **Custom Git repository**: `--repo-url https://github.com/you/fork.git`
 - **Preview changes**: `--dry-run`
 
 For example, to install a subset of tools, you can pipe flags after `bash -s --`:
