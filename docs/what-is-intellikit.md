@@ -6,7 +6,7 @@ IntelliKit is a collection of Python tools to help you analyze and improve the p
 |------|------|-------------|
 | **[Kerncap](tools/kerncap.md)** | Isolate | Captures kernel dispatches and builds standalone reproducers for HIP and Triton code.|
 | **[Metrix](tools/metrix.md)** | Profile | Translates hardware counter data into human-readable metrics like bandwidth, cache, and compute performance.|
-| **[Linex](tools/linex.md)** | Profile | Maps GPU performance to your source code, and analyzes source-line timing and stall.|
+| **[Linex](tools/linex.md)** | Profile | Maps GPU performance to your source code, and analyzes source-line timing and stalls.|
 | **[Nexus](tools/nexus.md)** | Inspect | Intercepts HSA packets to reveal what ran on the GPU, including assembly code and HIP source details.|
 | **[Accordo](tools/accordo.md)** | Validate | Confirms that optimized kernels produce the same results as their reference implementations.|
 | **[ROCm MCP](tools/rocm-mcp.md)** | MCP | Provides HIP compiler, documentation, and rocminfo servers for LLM agents.|
