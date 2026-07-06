@@ -1,15 +1,12 @@
----
-title: ROCm MCP
-description: Model Context Protocol servers for the AMD ROCm ecosystem
----
+# ROCm MCP
 
-A collection of Model Context Protocol (MCP) servers for interacting with the AMD ROCm ecosystem. Provides tools for LLMs to compile HIP code, access documentation, and query system information.
+ROCm MCP is a collection of Model Context Protocol (MCP) servers for interacting with the AMD ROCm ecosystem. It provides tools for LLMs to compile HIP code, access documentation, and query system information.
 
 ## Components
 
 ### HIP Compiler (`hip-compiler-mcp`)
 
-Tool for compiling HIP C/C++ code into binary executables using the `hipcc` compiler.
+A tool for compiling HIP C/C++ code into binary executables using the `hipcc` compiler.
 
 ### HIP Documentation (`hip-docs-mcp`)
 
@@ -52,9 +49,9 @@ Add the following to your MCP client configuration:
 }
 ```
 
-Adjust `/path/to/rocm_mcp` to where you have cloned or installed the package.
+Replace `/path/to/rocm_mcp` with the actual path where you have cloned or installed the package.
 
-If you installed with `pip` / `install.sh`, use the console script names (`hip-compiler-mcp`, `hip-docs-mcp`, `rocminfo-mcp`) on your `PATH`, or the full path under your venv.
+If you installed with `pip` or `install.sh`, use the console script names (`hip-compiler-mcp`, `hip-docs-mcp`, `rocminfo-mcp`) from your `PATH`, or the full path in your virtual environment.
 
 ## Development
 
@@ -71,4 +68,4 @@ uv run ./examples/hip_compiler.py
 pytest
 ```
 
-See the [MCP Setup guide](/intellikit/guides/mcp-setup/) for a complete multi-server configuration.
+See [Set up MCP](../how-to/mcp-setup.md) for information about multi-server configuration.

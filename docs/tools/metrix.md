@@ -1,23 +1,26 @@
----
-title: Metrix
-description: "GPU Profiling. Decoded. Clean, human-readable metrics for AMD GPUs."
----
+# Metrix
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+Metrix translates raw hardware counters into clean, human-readable metrics for AMD GPUs.
 
-Clean, human-readable metrics for AMD GPUs. No more cryptic hardware counters.
+## Features
 
-## Why Metrix?
+- Modern Python API
+- Human-readable metrics instead of raw counters
+- Unit tested and reliable
+- 20 metrics across memory, cache, compute, and GPU utilization (availability varies by GPU architecture)
+- Multi-run profiling supporting automatic aggregation with min/max/avg statistics
+- Kernel filtering with efficient regex filtering at the `rocprofv3` level
+- Multiple output formats, including text, JSON, and CSV
 
-- **Clean Python API** with modern design
-- **Human-readable metrics** instead of raw counters
-- **Unit tested** and reliable
-- **20 metrics** across memory, cache, compute, and GPU utilization (availability varies by GPU architecture)
-- **Multi-run profiling**: automatic aggregation with min/max/avg statistics
-- **Kernel filtering**: efficient regex filtering at rocprofv3 level
-- **Multiple output formats**: text, JSON, CSV
+## Requirements
+
+- Python >= 3.10
+- ROCm 6.x with `rocprofv3`
+- pandas >= 1.5.0
 
 ## Installation
+
+Run the following commands from the `metrix` directory:
 
 ```bash
 pip install -e .
@@ -25,40 +28,39 @@ pip install -e .
 
 ## Quick start
 
-<Tabs syncKey="interface">
-  <TabItem label="CLI">
-    ```bash
-    # Profile with all metrics (architecture auto-detected)
-    metrix ./my_app
+### CLI
 
-    # Time only (fast)
-    metrix --time-only -n 10 ./my_app
+```bash
+# Profile with all metrics (architecture auto-detected)
+metrix ./my_app
 
-    # Filter kernels by name
-    metrix --kernel matmul ./my_app
+# Time only (fast)
+metrix --time-only -n 10 ./my_app
 
-    # Custom metrics
-    metrix --metrics memory.l2_hit_rate,memory.coalescing_efficiency ./my_app
+# Filter kernels by name
+metrix --kernel matmul ./my_app
 
-    # Save to JSON
-    metrix -o results.json ./my_app
-    ```
-  </TabItem>
-  <TabItem label="Python API">
-    ```python
-    from metrix import Metrix
+# Custom metrics
+metrix --metrics memory.l2_hit_rate,memory.coalescing_efficiency ./my_app
 
-    # Architecture is auto-detected
-    profiler = Metrix()
-    results = profiler.profile("./my_app", num_replays=5)
+# Save to JSON
+metrix -o results.json ./my_app
+```
 
-    for kernel in results.kernels:
-        print(f"{kernel.name}: {kernel.duration_us.avg:.2f} us")
-        for metric, stats in kernel.metrics.items():
-            print(f"  {metric}: {stats.avg:.2f}")
-    ```
-  </TabItem>
-</Tabs>
+### Python API
+
+```python
+from metrix import Metrix
+
+# Architecture is auto-detected
+profiler = Metrix()
+results = profiler.profile("./my_app", num_replays=5)
+
+for kernel in results.kernels:
+    print(f"{kernel.name}: {kernel.duration_us.avg:.2f} us")
+    for metric, stats in kernel.metrics.items():
+        print(f"  {metric}: {stats.avg:.2f}")
+```
 
 ## Available metrics
 
@@ -139,9 +141,3 @@ metrix info <metric|profile> <name>
 ```
 
 GPU architecture is auto-detected using `rocminfo`.
-
-## Requirements
-
-- Python 3.9+
-- ROCm 6.x with rocprofv3
-- pandas >= 1.5.0

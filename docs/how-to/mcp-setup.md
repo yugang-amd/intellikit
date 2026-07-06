@@ -1,20 +1,17 @@
----
-title: MCP Setup
-description: Configure IntelliKit's Model Context Protocol servers for LLM agents
----
+# Set up MCP
 
-IntelliKit provides several MCP servers that let LLM agents compile HIP code, profile applications, access documentation, and query GPU hardware. This guide shows how to configure them.
+IntelliKit provides several MCP servers, which allow LLM agents to compile HIP code, profile applications, access documentation, and query GPU hardware. This topic explains how to configure these servers.
 
 ## Prerequisites
 
-- IntelliKit installed (see [Installation](/intellikit/getting-started/installation/))
+- [IntelliKit installation](../getting-started/installation.md)
 - `uv` (recommended) or `pip`
-- ROCm for GPU-related servers
+- [ROCm installation](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/) for GPU-related MCP servers
 - AMD uProf for `uprof-profiler-mcp`
 
 ## Full configuration
 
-With `uv` and a clone of the IntelliKit repo, point your MCP client at each package directory:
+To configure MCP servers using `uv` and a cloned IntelliKit repository, set up your MCP client to point to each package directory. Here's an example configuration:
 
 ```json
 {
@@ -47,11 +44,11 @@ With `uv` and a clone of the IntelliKit repo, point your MCP client at each pack
 }
 ```
 
-Replace `/path/to/intellikit` with the actual path to your IntelliKit clone.
+Replace `/path/to/intellikit` with the actual path to your cloned IntelliKit repository.
 
 ## Using pip-installed packages
 
-If you installed with `pip` or the `install.sh` script, the console script names are on your `PATH`:
+If you installed IntelliKit using `pip` or the `install.sh` script, the MCP console script names are already added to your system's `PATH`. You can configure the MCP client with these simple references:
 
 ```json
 {
@@ -73,16 +70,16 @@ If you installed with `pip` or the `install.sh` script, the console script names
 
 | Server | Package | What it does |
 |--------|---------|--------------|
-| `metrix-mcp` | metrix | GPU profiling with human-readable metrics |
-| `kerncap-mcp` | kerncap | Kernel extraction and isolation |
-| `hip-compiler-mcp` | rocm_mcp | Compile HIP C/C++ code |
-| `hip-docs-mcp` | rocm_mcp | Access HIP documentation |
-| `rocminfo-mcp` | rocm_mcp | Query GPU hardware topology |
-| `uprof-profiler-mcp` | uprof_mcp | CPU hotspot profiling via AMD uProf |
+| `metrix-mcp` | `metrix` | Profiles GPU applications and generates human-readable performance metrics|
+| `kerncap-mcp` | `kerncap` | Extracts and isolates GPU kernels|
+| `hip-compiler-mcp` | `rocm_mcp` | Compiles HIP C/C++ code|
+| `hip-docs-mcp` | `rocm_mcp` | Accesses HIP documentation|
+| `rocminfo-mcp` | `rocm_mcp` | Queries GPU hardware topology|
+| `uprof-profiler-mcp` | `uprof_mcp` | Profiles CPU hotspots using AMD uProf|
 
 ## Agent skills
 
-IntelliKit also provides installable `SKILL.md` playbooks for Kerncap, Metrix, Linex, Nexus, and Accordo:
+IntelliKit provides installable `SKILL.md` playbooks for Kerncap, Metrix, Linex, Nexus, and Accordo:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/AMDResearch/intellikit/main/install/skills/install.sh | bash
@@ -90,4 +87,4 @@ curl -sSL https://raw.githubusercontent.com/AMDResearch/intellikit/main/install/
 
 Target options: `--target cursor` | `claude` | `codex` | `agents` | `github`
 
-See the [Installation page](/intellikit/getting-started/installation/) for more details on the skills script.
+See [Install IntelliKit](../getting-started/installation.md) for more details about the skills script and usage.
