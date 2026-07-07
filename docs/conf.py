@@ -25,7 +25,7 @@ html_theme_options = {
 # for PDF output on Read the Docs
 project = "IntelliKit"
 author = "Advanced Micro Devices, Inc."
-copyright = "Copyright (c) 2026 Advanced Micro Devices, Inc. All rights reserved."
+copyright = "Copyright (c) 2026 Advanced Micro Devices, Inc. All rights reserved."  # noqa: A001
 
 external_toc_path = "./sphinx/_toc.yml"
 
