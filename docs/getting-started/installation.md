@@ -1,16 +1,25 @@
+---
+myst:
+    html_meta:
+        "description": "Install IntelliKit tools and agent skills from Git or using pip. Covers system requirements, quick install, individual packages, and install script options."
+        "keywords": "IntelliKit, install, ROCm, AMD Instinct, GPU, pip, uv, Python, Kerncap, Metrix, Linex, Nexus, Accordo"
+---
+
 # Install IntelliKit
 
 This topic describes how to install IntelliKit.
 
 ## Requirements
 
+IntelliKit requires the following software and hardware.
+
 | Requirement | Notes |
 |-------------|--------|
 | Python | 3.10 or later. |
 | ROCm | 7.0 or later for GPU packages. Can skip if using host-side tools like `uprof_mcp`. |
-| GPU | Both Instinct and RDNA GPUs are supported. Instinct MI300+ recommended for full GPU functionality. Specific tool requirements may vary; check each tool's page for details. |
+| GPU | Both AMD Instinct™ and RDNA GPUs are supported. AMD Instinct™ MI300+ recommended for full GPU functionality. Specific tool requirements might vary; check each tool's page for details. |
 | uProf | AMD uProf on x86; required for `uprof_mcp` only. |
-| cmake, libdwarf-dev, libzstd-dev | Required for Accordo and Nexus (C++ build via KernelDB). See the following section for details. |
+| cmake, libdwarf-dev, libzstd-dev | Required for Accordo and Nexus (C++ build through KernelDB). See the following section for details. |
 
 ### System dependencies for Accordo and Nexus
 
@@ -65,6 +74,8 @@ pip install -e ./linex
 ```
 
 ## Install script options
+
+The install scripts provide options for customizing which tools are installed and how.
 
 ### Tools script (`install/tools/install.sh`)
 

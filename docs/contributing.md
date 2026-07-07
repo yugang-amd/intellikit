@@ -1,8 +1,15 @@
+---
+myst:
+    html_meta:
+        "description": "Learn how to contribute to IntelliKit: clone the repository, install packages in editable mode, run tests, and report bugs on the issue tracker."
+        "keywords": "IntelliKit, contributing, open source, AMD, GitHub, Python, tests, pull request"
+---
+
 # Contributing
 
-To report issues and submit pull requests, visit the [GitHub repository](https://github.com/AMDResearch/IntelliKit).
+To report issues and submit pull requests, visit the [GitHub repository](https://github.com/AMDResearch/intellikit).
 
-## Getting started
+## Set up a development environment
 
 To clone the repository and navigate into the directory:
 
@@ -39,6 +46,8 @@ PYTHONPATH=kerncap pytest kerncap/tests/integration/ -v
 
 ## Project structure
 
+The IntelliKit repository is organized as follows.
+
 ```
 intellikit/
 ├── accordo/        Kernel validation
@@ -52,11 +61,11 @@ intellikit/
 └── docs/           This documentation site
 ```
 
-## Bugs and ideas
+## Report bugs and suggest features
 
-Report issues or share your suggestions on [github.com/AMDResearch/intellikit/issues](https://github.com/AMDResearch/intellikit/issues).
+Report issues or share your suggestions on the [IntelliKit issue tracker](https://github.com/AMDResearch/intellikit/issues).
 
-## License
+## IntelliKit license
 
 This project is licensed under the [MIT License](https://github.com/AMDResearch/intellikit/blob/main/LICENSE).
 

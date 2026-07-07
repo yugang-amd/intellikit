@@ -1,4 +1,11 @@
-# Profile a GPU application with Metrix
+---
+myst:
+    html_meta:
+        "description": "Profile a GPU application with IntelliKit Metrix using the CLI or Python API. Collect hardware counters and human-readable performance metrics on AMD GPUs."
+        "keywords": "IntelliKit, Metrix, GPU profiling, AMD GPU, ROCm, HIP, hardware counters, bandwidth, cache"
+---
+
+# Profile a GPU application with Metrix in IntelliKit
 
 This topic explains how to use Metrix to profile a GPU application and generate human-readable performance metrics.
 
@@ -22,7 +29,7 @@ metrix --metrics memory.hbm_bandwidth_utilization,memory.l2_hit_rate ./my_app
 
 ## Python API
 
-Access more advanced profiling features via the Python API.
+Access more advanced profiling features through the Python API.
 
 ```python
 from metrix import Metrix
@@ -37,6 +44,8 @@ for kernel in results.kernels:
 ```
 
 ## Example output
+
+The following output shows Metrix profiling a vector add kernel with all metrics enabled.
 
 ```
 ================================================================================
@@ -61,6 +70,8 @@ CACHE PERFORMANCE:
 ```
 
 ## Next steps
+
+After profiling your first application, explore the rest of the IntelliKit toolkit.
 
 - **Dive deeper into profiling:** see [Metrix](../tools/metrix.md) for a full list of available metrics
 - **Map performance to source lines:** see [Linex](../tools/linex.md) for source-level profiling

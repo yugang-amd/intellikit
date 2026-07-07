@@ -1,15 +1,26 @@
-# Accordo
+---
+myst:
+    html_meta:
+        "description": "Accordo validates GPU kernel correctness by capturing and comparing outputs from reference and optimized implementations on AMD GPUs with configurable tolerance."
+        "keywords": "Accordo, AMD GPU, ROCm, kernel validation, correctness, optimization, HIP, KernelDB"
+---
+
+# Accordo (IntelliKit)
 
 Accordo automatically validates GPU kernel correctness by capturing and comparing kernel outputs from reference and optimized implementations.
 
 ## Features
 
+Accordo provides the following capabilities.
+
 - **Automatic kernel extraction**: uses KernelDB to extract kernel signatures from binaries
-- **Snapshot-based validation**: captures kernel outputs once and validate against multiple optimizations
+- **Snapshot-based validation**: captures kernel outputs once and validates against multiple optimizations
 - **Configurable tolerance**: sets precision requirements for floating-point comparisons (`atol`, `rtol`, `equal_nan`)
 - **Performance tracking**: measures and compares execution times
 
 ## Requirements
+
+Accordo requires the following.
 
 - Python >= 3.10
 - ROCm toolchain
@@ -17,7 +28,7 @@ Accordo automatically validates GPU kernel correctness by capturing and comparin
 
 ## Installation
 
-Accordo compiles C++ code (via KernelDB) during installation. Ensure `cmake`, `libdwarf-dev`, and `libzstd-dev` are pre-installed:
+Accordo compiles C++ code (through KernelDB) during installation. Ensure `cmake`, `libdwarf-dev`, and `libzstd-dev` are pre-installed:
 
 ```bash
 # System prerequisites (Debian/Ubuntu)
@@ -28,6 +39,8 @@ pip install "git+https://github.com/AMDResearch/intellikit.git#subdirectory=acco
 ```
 
 ## Quick start
+
+Use the Python API or CLI to validate GPU kernels.
 
 ### Python API
 
@@ -62,6 +75,8 @@ accordo validate \
 
 ### Testing multiple optimizations
 
+You can capture a single reference snapshot and compare it against multiple optimized variants.
+
 ```python
 validator = Accordo(binary="./ref", kernel_name="matmul")
 ref = validator.capture_snapshot(binary="./ref")
@@ -73,6 +88,8 @@ for opt_binary in ["./opt_v1", "./opt_v2", "./opt_v3"]:
 ```
 
 ## CLI reference
+
+The Accordo CLI provides the following options.
 
 ```
 accordo validate \
@@ -90,6 +107,8 @@ accordo validate \
 ```
 
 ## API reference
+
+The following describes the Accordo Python API classes and methods.
 
 ### `Accordo(binary, kernel_name, **options)`
 

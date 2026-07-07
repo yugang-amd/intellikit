@@ -1,4 +1,11 @@
-# Nexus
+---
+myst:
+    html_meta:
+        "description": "Nexus intercepts HSA packets to extract GPU kernel assembly and HIP source from AMD GPU applications, enabling detailed GPU execution inspection with ROCm."
+        "keywords": "Nexus, AMD GPU, ROCm, HSA, AQL, GPU assembly, HIP source, kernel inspection"
+---
+
+# Nexus (IntelliKit)
 
 Nexus intercepts GPU AQL (Architected Queuing Language) packets within the Heterogeneous System Architecture (HSA), extracts source code, and outputs both assembly and HIP code in a structured format.
 
@@ -21,6 +28,8 @@ pip install -e ./nexus
 
 ### Manual C++ build (optional)
 
+If you need to build the C++ library manually, use the following commands.
+
 ```bash
 cmake -B build \
     -DCMAKE_PREFIX_PATH=${ROCM_PATH} \
@@ -31,6 +40,8 @@ cmake --build build --parallel 16
 ```
 
 ## Usage
+
+Nexus can be used through the Python API or by setting environment variables directly.
 
 ### Python API
 
@@ -71,7 +82,7 @@ old_trace = Nexus.load("my_trace.json")
 
 ### Environment variables
 
-Use environment variables to run Nexus directly via `HSA_TOOLS_LIB`:
+Use environment variables to run Nexus directly using `HSA_TOOLS_LIB`:
 
 ```bash
 export HSA_TOOLS_LIB=/path/to/libnexus.so  # installed into site-packages/nexus/

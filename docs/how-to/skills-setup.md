@@ -1,4 +1,11 @@
-# Set up skills
+---
+myst:
+    html_meta:
+        "description": "Install IntelliKit SKILL.md playbooks for AI coding assistants like Cursor, Claude Code, Codex, and GitHub Copilot to profile, inspect, and validate GPU kernels."
+        "keywords": "IntelliKit, skills, SKILL.md, AI agent, Cursor, Claude, Codex, GitHub Copilot, GPU, ROCm"
+---
+
+# Set up skills in IntelliKit
 
 IntelliKit ships `SKILL.md` playbooks for five tools: Metrix, Accordo, Nexus, Linex, and Kerncap. These playbooks provide AI coding assistants with step-by-step instructions for profiling, inspecting, and validating GPU kernels.
 
@@ -12,6 +19,8 @@ A skill is a markdown file (`SKILL.md`) that teaches an AI agent how to use a to
 - Error handling guidance
 
 ## Available skills
+
+IntelliKit includes the following skills and their trigger conditions.
 
 | Skill | Tool | Triggers on |
 |-------|------|-------------|
@@ -49,6 +58,7 @@ curl -sSL https://raw.githubusercontent.com/AMDResearch/intellikit/main/install/
 ```
 
 Skills are installed in `.cursor/skills/{tool}/SKILL.md`. The Cursor agent automatically detects and uses installed skills.
+
 ### Claude Code
 
 ```bash
@@ -83,7 +93,9 @@ curl -sSL .../install/skills/install.sh | bash -s -- --target cursor --global
 # Installs to ~/.cursor/skills/
 ```
 
-## Other options
+## Additional install options
+
+The skills script also supports preview and custom source options.
 
 ```bash
 # Preview what would be installed

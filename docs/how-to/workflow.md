@@ -1,8 +1,17 @@
-# Using IntelliKit end to end
+---
+myst:
+    html_meta:
+        "description": "Walk through the full IntelliKit workflow: profile a GPU application, inspect execution, optimize a kernel, and validate correctness using Metrix, Nexus, Linex, Kerncap, and Accordo."
+        "keywords": "IntelliKit, GPU workflow, ROCm, HIP, Metrix, Nexus, Linex, Kerncap, Accordo, kernel optimization"
+---
+
+# Use IntelliKit end to end
 
 This topic explains the full IntelliKit workflow: profiling a GPU application, inspecting execution, optimizing a kernel, and validating correctness.
 
 ## The pipeline
+
+The IntelliKit workflow follows five stages.
 
 ```
 Isolate → Profile → Inspect → Optimize → Validate
@@ -106,7 +115,7 @@ else:
 
 ## Complete example
 
-Bringing all steps together, here's an end-to-end example of profiling, inspecting, and validating your GPU kernel optimization:
+The following example brings all steps together to profile, inspect, and validate a GPU kernel optimization:
 
 ```python
 from metrix import Metrix
