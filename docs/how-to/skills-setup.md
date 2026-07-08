@@ -49,6 +49,7 @@ curl -sSL https://raw.githubusercontent.com/AMDResearch/intellikit/main/install/
 ```
 
 Skills are installed in `.cursor/skills/{tool}/SKILL.md`. The Cursor agent automatically detects and uses installed skills.
+
 ### Claude Code
 
 ```bash
@@ -56,7 +57,7 @@ curl -sSL https://raw.githubusercontent.com/AMDResearch/intellikit/main/install/
   | bash -s -- --target claude
 ```
 
-Skills land in `.claude/skills/{tool}/SKILL.md`.
+Skills are installed in `.claude/skills/{tool}/SKILL.md`.
 
 ### Codex
 
