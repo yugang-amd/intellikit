@@ -13,11 +13,11 @@ html_theme_options = {
     "header_link": False,
     "nav_secondary_items": {
         "GitHub": "https://github.com/AMDResearch/intellikit",
-        "ROCm Docs": "https://rocm.docs.amd.com/en/latest/",
         "Blogs": "https://rocm.blogs.amd.com/",
         "ROCm Developer Hub": "https://www.amd.com/en/developer/resources/rocm-hub.html",
         "Instinct Docs": "https://instinct.docs.amd.com/",
-        "Infinity Hub": "https://www.amd.com/en/developer/resources/infinity-hub.html"
+        "Infinity Hub": "https://www.amd.com/en/developer/resources/infinity-hub.html",
+        "Support": "https://github.com/AMDResearch/intellikit/issues/new/choose",
     },
     "link_main_doc": False,
 }
@@ -25,7 +25,7 @@ html_theme_options = {
 # for PDF output on Read the Docs
 project = "IntelliKit"
 author = "Advanced Micro Devices, Inc."
-copyright = "Copyright (c) 2026 Advanced Micro Devices, Inc. All rights reserved."
+copyright = "Copyright (c) 2026 Advanced Micro Devices, Inc. All rights reserved."  # noqa: A001
 
 external_toc_path = "./sphinx/_toc.yml"
 

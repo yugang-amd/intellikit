@@ -1,8 +1,17 @@
-# Linex
+---
+myst:
+    html_meta:
+        "description": "Linex maps GPU performance metrics to your HIP source code lines, identifying hotspots, stall cycles, and idle execution on AMD GPUs with ROCm."
+        "keywords": "Linex, AMD GPU, ROCm, source-line profiling, GPU hotspot, stall cycles, HIP, instruction analysis"
+---
+
+# Linex (IntelliKit)
 
 Linex maps GPU performance metrics directly to the corresponding lines of your source code.
 
 ## Requirements
+
+Linex requires the following.
 
 - Python >= 3.10
 - ROCm 7.0+ with `rocprofv3`
@@ -14,6 +23,8 @@ pip install -e .
 ```
 
 ## Quick start
+
+The following example profiles an application and prints the five hottest source lines.
 
 ```python
 from linex import Linex
@@ -41,6 +52,8 @@ Linex provides instruction-level GPU performance metrics mapped to corresponding
 
 ## Compiling with and without `-g`
 
+The availability of source-line data depends on whether your application is compiled with debug symbols.
+
 | Build | `instructions` | `source_lines` | `file` / `line` |
 |-------|----------------|-----------------|------------------|
 | **With `-g`** | Populated (ISA + cycles) | Populated (aggregated by file:line) | Real file path and line number |
@@ -50,6 +63,8 @@ Linex provides instruction-level GPU performance metrics mapped to corresponding
 - Omit `-g` when you only need assembly-level metrics. You'll still receive data for each instruction, including `isa`, `latency_cycles`, `stall_cycles`, and so on.
 
 ## API
+
+The Linex API exposes the profiler class, source line objects, and instruction data objects.
 
 ### Linex class
 
@@ -100,6 +115,8 @@ inst.stall_percent         # Convenience: stall_cycles / latency_cycles * 100
 ```
 
 ## Examples
+
+The following examples demonstrate common Linex analysis patterns.
 
 ```python
 # Find memory-bound lines

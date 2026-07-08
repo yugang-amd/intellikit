@@ -1,8 +1,17 @@
-# Metrix
+---
+myst:
+    html_meta:
+        "description": "Metrix translates raw AMD GPU hardware counters into human-readable metrics including HBM bandwidth, cache hit rates, compute throughput, and memory coalescing."
+        "keywords": "Metrix, AMD GPU, ROCm, GPU metrics, hardware counters, HBM bandwidth, cache, profiling"
+---
+
+# Metrix (IntelliKit)
 
 Metrix translates raw hardware counters into clean, human-readable metrics for AMD GPUs.
 
 ## Features
+
+Metrix provides the following capabilities.
 
 - Modern Python API
 - Human-readable metrics instead of raw counters
@@ -13,6 +22,8 @@ Metrix translates raw hardware counters into clean, human-readable metrics for A
 - Multiple output formats, including text, JSON, and CSV
 
 ## Requirements
+
+Metrix requires the following.
 
 - Python >= 3.10
 - ROCm 6.x with `rocprofv3`
@@ -27,6 +38,8 @@ pip install -e .
 ```
 
 ## Quick start
+
+Use the CLI for quick profiling, or the Python API for programmatic access.
 
 ### CLI
 
@@ -63,6 +76,8 @@ for kernel in results.kernels:
 ```
 
 ## Available metrics
+
+Metrix provides 20 metrics organized by category. Availability varies by GPU architecture.
 
 ### Compute
 
@@ -115,6 +130,8 @@ for kernel in results.kernels:
 | `memory.atomic_latency` | Atomic operation latency (cycles) |
 
 ## CLI reference
+
+The Metrix CLI supports the following commands and options.
 
 ```
 metrix [--version] <command> ...

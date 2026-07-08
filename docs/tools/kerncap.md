@@ -1,8 +1,17 @@
-# Kerncap
+---
+myst:
+    html_meta:
+        "description": "Kerncap extracts and isolates GPU kernels from HIP and Triton applications on AMD GPUs. Profile, capture, replay, and validate kernels with a standalone reproducer."
+        "keywords": "Kerncap, GPU kernel, AMD GPU, ROCm, HIP, Triton, kernel isolation, reproducer, HSACO"
+---
 
-Kerncap profiles a running application, intercepts a target kernel dispatch, captures its complete runtime state (full device memory snapshot, kernarg buffer, and HSACO), and generates a standalone reproducer that can replay the kernel in isolation using VA-faithful HSA dispatch.
+# Kerncap (IntelliKit)
+
+Kerncap profiles a running application, intercepts a target kernel dispatch, captures its complete runtime state (full device memory snapshot, kernarg buffer, and HSA Code Object (HSACO)), and generates a standalone reproducer that can replay the kernel in isolation using virtual address (VA)-faithful HSA dispatch.
 
 ## How it works
+
+Kerncap operates in five stages to produce a standalone kernel reproducer.
 
 ```
 1. Profile       rocprofv3 --kernel-trace --stats → rank kernels by duration
@@ -17,6 +26,8 @@ Kerncap profiles a running application, intercepts a target kernel dispatch, cap
 ```
 
 ## Installation
+
+Kerncap requires a ROCm 7.0+ environment to build its native library.
 
 ### Prerequisites
 
@@ -186,7 +197,7 @@ kerncap validate ./isolated/flash_attn_fwd --tolerance 1e-3 --rtol 1e-2
 kerncap validate ./isolated/flash_attn_fwd
 ```
 
-**Validation modes**: For VA-faithful captures, the baseline `validate` operation acts as a smoke test until a rebuilt HSACO is available. To compare captured and rebuilt execution byte-for-byte, the `--hsaco` flag, or let Kerncap auto-detect `candidate.hsaco` or `optimized.hsaco`.
+**Validation modes**: For VA-faithful captures, the baseline `validate` operation acts as a smoke test until a rebuilt HSACO is available. To compare captured and rebuilt execution byte-for-byte, use the `--hsaco` flag or let Kerncap auto-detect `candidate.hsaco` or `optimized.hsaco`.
 
 `kerncap validate <dir>` auto-detects rebuilt HSACOs from the edit loop: `candidate.hsaco` from Triton `python3 reproducer.py`, or `optimized.hsaco` from HIP `make recompile`. Validation is performed by comparing the captured kernel execution against the rebuilt HSACO, producing a byte-exact memory-region summary. 
 
@@ -200,9 +211,9 @@ The extract stage takes a kernel name and a runnable command, producing a fully 
 
 Snapshots the full runtime state of a single kernel dispatch for later replay.
 
-HIP kernels are captured at the HSA level. `libkerncap.so` is loaded via `LD_PRELOAD` with `rocprofiler-sdk` registration. Kerncap hooks into `hsa_queue_create` to install a packet intercept callback. When the target dispatch arrives, Kerncap interposes a completion signal, waits for execution to complete, and walks the kernarg buffer. All device memory allocations are tracked via `hsa_amd_memory_pool_allocate` and `hsa_amd_vmem_*` hooks. At capture time, a full device memory snapshot is taken and every tracked allocation is D2H copied. The replay binary restores all memory at the original virtual addresses using HSA VMEM APIs, then dispatches the kernel with the captured HSACO. No DWARF metadata or argument parsing is required.
+HIP kernels are captured at the HSA level. `libkerncap.so` is loaded using `LD_PRELOAD` with `rocprofiler-sdk` registration. Kerncap hooks into `hsa_queue_create` to install a packet intercept callback. When the target dispatch arrives, Kerncap interposes a completion signal, waits for execution to complete, and walks the kernarg buffer. All device memory allocations are tracked through `hsa_amd_memory_pool_allocate` and `hsa_amd_vmem_*` hooks. At capture time, a full device memory snapshot is taken and every tracked allocation is D2H copied. The replay binary restores all memory at the original virtual addresses using HSA VMEM APIs, then dispatches the kernel with the captured HSACO. No DWARF metadata or argument parsing is required.
 
-Triton kernels are captured with `libkerncap.so` loaded via `LD_PRELOAD` and a Python compile shim installed through `sitecustomize.py`. The shim records `name_map.json` rows that connect Triton's user-facing function name, signature, constant expressions, launch attributes, source snapshot, and HSACO SHA-256 to the captured dispatch. A short-lived run observer records tensor layout metadata, so the editable Python reproducer can rebuild accurate `torch.as_strided` views. The captured kernarg buffer and memory snapshot remain the source of truth.
+Triton kernels are captured with `libkerncap.so` loaded using `LD_PRELOAD` and a Python compile shim installed through `sitecustomize.py`. The shim records `name_map.json` rows that connect Triton's user-facing function name, signature, constant expressions, launch attributes, source snapshot, and HSACO SHA-256 to the captured dispatch. A short-lived run observer records tensor layout metadata, so the editable Python reproducer can rebuild accurate `torch.as_strided` views. The captured kernarg buffer and memory snapshot remain the source of truth.
 
 ### Find source
 
@@ -222,7 +233,7 @@ The captured data and located source files are assembled into a standalone proje
 
 HIP kernels generate a VA-faithful replay project using `kerncap-replay`. The project includes the captured HSACO, kernarg buffer, and a full snapshot of device memory stored in `capture/`. Running `make run` replays the kernel at its original virtual addresses using HSA VMEM APIs. There is no need to recompile the kernel source.
 
-When `--source-dir` is provided, Kerncap goes a step further by locating the `.cu` translation unit (via `compile_commands.json` or reverse-include search) and generating:
+When `--source-dir` is provided, Kerncap goes a step further by locating the `.cu` translation unit (through `compile_commands.json` or reverse-include search) and generating:
 
 - `kernel_variant.cpp`: a copy of the main kernel source file for editing
 - `deps/`: copies of all `#include` dependency headers, traced up to 5 levels deep
@@ -254,7 +265,7 @@ Makefile                make run | make recompile | make run-variant | make vali
 
 **Prerequisites for `make recompile`**: 
 
-The recompilation workflow requires `compile_commands.json` from your project's build directory. If your project is built with CMake, regenerate it with `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON`. Without this file, `make run` and `kerncap validate` can still work by using the captured HSACO, but `make recompile` won't be available.
+The recompilation workflow requires `compile_commands.json` from your project's build directory. If your project is built with CMake, regenerate it with `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON`. Without this file, `make run` and `kerncap validate` can still work by using the captured HSACO, but `make recompile` will not be available.
 
 For Triton captures, the edit loop is Python-native rather than Makefile-based:
 
@@ -317,6 +328,8 @@ The Python API is designed for LLM-driven workflows. A Cursor agent (or any LLM 
 
 ## Technical details
 
+The following sections describe implementation details relevant to advanced use cases.
+
 ### Embedded device pointers
 
 Kerncap uses VA-faithful replay, ensuring all device memory is captured in a full snapshot and restored to its original virtual addresses during replay. Embedded device pointers (for example, `T**` in batched BLAS or structs with pointer members) work automatically. No pointer patching or relocation tables is required.
@@ -343,11 +356,13 @@ Kerncap supports a range of validation targets for different use cases:
 
 - **Triton**: Flash Attention forward kernel (`ROCm/flash-attention`) in `rocm/pytorch` container
 - **HIP**: Composable Kernel GEMM XDL FP16 (`ROCm/composable_kernel`) in `rocm/composable_kernel:ck_pytorch` container
-- **HIP with embedded pointers**: Batched vector scale kernel in local ROCm environment, testing T** (double-pointer) arguments via VA-faithful replay
+- **HIP with embedded pointers**: Batched vector scale kernel in local ROCm environment, testing T** (double-pointer) arguments using VA-faithful replay
 
-llama.cpp/ggml kernels (with template-qualified names like `mul_mat_q<(ggml_type)7, 32, true>`) are also supported via the `-D` flag to provide preprocessor definitions.
+llama.cpp/ggml kernels (with template-qualified names like `mul_mat_q<(ggml_type)7, 32, true>`) are also supported using the `-D` flag to provide preprocessor definitions.
 
 ## Project structure
+
+The Kerncap repository is organized as follows.
 
 ```
 src/kerncap.{hip,hpp}     HSA tool loaded via LD_PRELOAD (`rocprofiler-sdk` registration)
@@ -360,6 +375,8 @@ vendor/                    Vendored nlohmann/json headers
 tests/                     Unit + integration tests
 ```
 
-## Related links
+## Research paper
+
+The following paper describes the design and evaluation of Kerncap.
 
 - [Kerncap: Automated Kernel Extraction and Isolation for AMD GPUs](https://arxiv.org/abs/2605.03208) (arXiv)

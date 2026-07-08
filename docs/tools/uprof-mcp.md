@@ -1,8 +1,17 @@
-# uProf MCP
+---
+myst:
+    html_meta:
+        "description": "uProf MCP is an MCP server that enables LLMs to profile x86 CPU applications using AMD uProf, identifying hotspot functions consuming CPU time."
+        "keywords": "uProf MCP, AMD uProf, CPU profiling, MCP server, LLM, hotspot analysis, x86"
+---
 
-uProf MCP is a Model Context Protocol (MCP) server for using AMD uProf to profile x86 CPU applications. It enables LLMs to analyze CPU performance hotspots through the AMD uProf profiler.
+# uProf MCP (IntelliKit)
+
+uProf MCP is a Model Context Protocol (MCP) server for using AMD uProf™ to profile x86 CPU applications. It enables LLMs to analyze CPU performance hotspots through the AMD uProf profiler.
 
 ## Features
+
+uProf MCP provides the following capabilities.
 
 - Profile CPU applications for hotspot analysis
 - Identify top functions consuming CPU time
@@ -10,6 +19,8 @@ uProf MCP is a Model Context Protocol (MCP) server for using AMD uProf to profil
 - Support for custom executable arguments
 
 ## Requirements
+
+uProf MCP requires the following.
 
 - Python 3.10+
 - AMD uProf
@@ -79,6 +90,8 @@ python examples/uprof_profiler.py --executable ./my_app --args arg1 arg2 --class
 
 ## API reference
 
+The following describes the uProf MCP Python API for non-agentic use.
+
 ### UProfProfiler class
 
 ```python
@@ -102,6 +115,8 @@ profiler = UProfProfiler(logger=None)
   - `UProfProfilerResult` with a `report_path` attribute
 
 ## Development
+
+Use the following commands for local development and testing.
 
 ```bash
 # Sync dependencies

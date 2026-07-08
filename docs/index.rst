@@ -1,9 +1,13 @@
+.. meta::
+   :description: IntelliKit is a Python toolkit for AMD GPU performance analysis and validation. Profile kernels, inspect assembly, map source lines, and validate optimizations with ROCm.
+   :keywords: IntelliKit, AMD GPU, ROCm, GPU profiling, kernel analysis, HIP, performance analysis, MCP, AI agent
+
 IntelliKit documentation
 ========================
 
-IntelliKit is a set of Python tools designed for AMD-centric performance analysis and validation. For more information, see :doc:`What is Intellikit <what-is-intellikit>`
+IntelliKit is a set of Python tools designed for AMD-centric performance analysis and validation. For more information, see :doc:`What is IntelliKit <what-is-intellikit>`
 
-IntelliKit is a component of the `Hyperloom <https://github.com/AMD-AGI/Hyperloom>` toolkit. The IntelliKit source code is
+IntelliKit is a component of the `Hyperloom <https://github.com/AMD-AGI/Hyperloom>`_ toolkit. The IntelliKit source code is
 hosted in the `AMDResearch/intellikit <https://github.com/AMDResearch/intellikit>`_ GitHub repository.
 
 .. grid:: 2
@@ -33,5 +37,5 @@ hosted in the `AMDResearch/intellikit <https://github.com/AMDResearch/intellikit
 To contribute to the documentation, see the
 :doc:`Contributing <contributing>` page.
 
-IntelliKit is released under the MIT license. For details, see the `IntelliKit GitHub repository <https://github.com/AMDResearch/intellikit/blob/main/LICENSE>`_.
+IntelliKit is released under the :doc:`MIT license <license>`.
 
