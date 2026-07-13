@@ -4,9 +4,6 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   site: "https://amdresearch.github.io",
   base: "/intellikit",
-  experimental: {
-    contentLayer: true,
-  },
   integrations: [
     starlight({
       title: "IntelliKit",
@@ -40,9 +37,9 @@ export default defineConfig({
         {
           label: "Guides",
           items: [
-            { label: "MCP Setup", slug: "how-to/mcp-setup" },
-            { label: "Skills Setup", slug: "how-to/skills-setup" },
-            { label: "End-to-End Workflow", slug: "how-to/workflow" },
+            { label: "MCP Setup", slug: "guides/mcp-setup" },
+            { label: "Skills Setup", slug: "guides/skills-setup" },
+            { label: "End-to-End Workflow", slug: "guides/workflow" },
           ],
         },
         { label: "Contributing", slug: "contributing" },
